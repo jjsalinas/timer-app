@@ -1,0 +1,12 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 20rem;
+    transform: translateX(50%) translateY(50%);
+}
+
+ion-input.custom {
+    max-width: 2rem;
+}
