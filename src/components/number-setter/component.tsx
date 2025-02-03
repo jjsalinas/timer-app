@@ -1,12 +1,20 @@
 import React, { useState, useRef } from "react";
-import { IonButton, IonIcon, IonInput } from "@ionic/react";
+import {
+  IonButton,
+  IonIcon,
+  IonInput,
+  HTMLIonInputElement,
+} from "@ionic/react";
 import { add, remove } from "ionicons/icons";
 import "./styles.css";
 
 import { NumberSetterProps } from "./props";
 
-const NumberSetter: React.FC<NumberSetterProps> = () => {
-  const [value, setValue] = useState<number>(0);
+const NumberSetter: React.FC<NumberSetterProps> = ({
+  initValue,
+  updateValue,
+}: NumberSetterProps) => {
+  const [value, setValue] = useState<number>(initValue ?? 0);
   const numberInput = useRef<HTMLIonInputElement>(null);
 
   const onInput = (event: Event) => {
@@ -19,6 +27,11 @@ const NumberSetter: React.FC<NumberSetterProps> = () => {
     const inputCmp = numberInput.current;
     if (inputCmp !== null) {
       inputCmp.value = filteredValue;
+    }
+
+    // If value from parent, call parent update method
+    if (updateValue) {
+      updateValue(Number(filteredValue));
     }
   };
 
