@@ -38,6 +38,10 @@ const Countdown: React.FC<CountdownProps> = ({
   };
 
   useEffect(() => {
+    resetCount();
+  }, []);
+
+  useEffect(() => {
     // console.log("tic tac --:", tickingSecond);
     if (tickingSecond === 0) {
       updateCurrentRound();
@@ -47,33 +51,46 @@ const Countdown: React.FC<CountdownProps> = ({
     }
   }, [tickingSecond]);
 
+  useEffect(() => {
+    if (tickingSecond === 0) {
+      resetCount();
+    }
+  }, [currentRound]);
+
   /*
     TODO: Styling
     Footer on horizontal flex.
+    Forward button logic fix.
   */
-
   return (
     <>
       <div className={styleClassName}>
-        <IonText className="timecount-wrapper">
-          <h1>{tickingSecond}</h1>
-        </IonText>
+        <div className="timecount-wrapper">
+          <IonText className="timecount-text">
+            <h1>{tickingSecond}</h1>
+          </IonText>
+        </div>
         <IonFooter>
           <IonToolbar>
-            <IonButton shape="round" size="small" onClick={resetCount}>
-              <IonIcon slot="icon-only" name="play-skip-back-outline"></IonIcon>
-            </IonButton>
-            <IonText>
-              <h3>
-                {currentRound} / {totalRounds}
-              </h3>
-            </IonText>
-            <IonButton shape="round" size="small" onClick={finishCount}>
-              <IonIcon
-                slot="icon-only"
-                name="play-skip-forward-outline"
-              ></IonIcon>
-            </IonButton>
+            <div className="timecount-footer">
+              <IonButton shape="round" size="small" onClick={resetCount}>
+                <IonIcon
+                  slot="icon-only"
+                  name="play-skip-back-outline"
+                ></IonIcon>
+              </IonButton>
+              <IonText>
+                <h3>
+                  {currentRound} / {totalRounds}
+                </h3>
+              </IonText>
+              <IonButton shape="round" size="small" onClick={finishCount}>
+                <IonIcon
+                  slot="icon-only"
+                  name="play-skip-forward-outline"
+                ></IonIcon>
+              </IonButton>
+            </div>
           </IonToolbar>
         </IonFooter>
       </div>
