@@ -1,0 +1,21 @@
+.countdown-starting {
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+}
+
+.countdown-countdown {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+}
+
+.countdown-intermission {
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+}
+
+.timecount-wrapper {
+    height: 80%;
+}
