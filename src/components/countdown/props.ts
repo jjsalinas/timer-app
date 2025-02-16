@@ -5,5 +5,5 @@ export interface CountdownProps {
   seconds: number;
   currentRound: number;
   totalRounds: number;
-  updateCurrentRound: () => void;
+  updateCurrentRound: (backwards?: boolean) => void;
 }

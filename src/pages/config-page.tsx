@@ -19,7 +19,6 @@ const ConfigPage: React.FC = () => {
     waitDuration: number,
   ) => {
     if (currentRound === 1) {
-      console.log("START");
       setConfigTotalRounds(rounds * 2 + 1); // Starting 1 + (1 active + 1 pause) per (round)
       setConfigActiveDuration(activeDuration);
       setConfigWaitDuration(waitDuration);
@@ -27,27 +26,32 @@ const ConfigPage: React.FC = () => {
     }
   };
 
-  const updateRound = () => {
-    const newRound = currentRound + 1;
-    setCurrentRound(currentRound + 1);
+  const updateRound = (backwards?: boolean) => {
+    let newRound = currentRound + 1;
+    if (backwards && currentRound > 1) {
+      newRound = currentRound - 1;
+    }
+    if (showCountdown && newRound <= configTotalRounds) {
+      setCurrentRound(newRound);
+    }
     if (newRound === configTotalRounds + 1) {
       setShowCountdown(false);
       setCurrentRound(1);
     }
   };
 
-  const getRoundType = () => {
-    if (currentRound === 1) {
+  const getRoundType = (roundValue: number) => {
+    if (roundValue === 1) {
       return CountdownKind.starting;
     }
-    if (currentRound > 1 && currentRound % 2 === 0) {
+    if (roundValue > 1 && roundValue % 2 === 0) {
       return CountdownKind.countdown;
     }
     return CountdownKind.intermission;
   };
 
-  const getRoundSeconds = () => {
-    const roundType = getRoundType();
+  const getRoundSeconds = (roundValue: number) => {
+    const roundType = getRoundType(roundValue);
     if (roundType === CountdownKind.starting) {
       return 5;
     }
@@ -57,31 +61,33 @@ const ConfigPage: React.FC = () => {
     return configWaitDuration;
   };
 
-  const getCountdown = () => {
-    const newType = getRoundType();
-    const newSeconds = getRoundSeconds();
+  const getCountdown = (roundValue: number) => {
+    if (!showCountdown) {
+      return <></>;
+    }
+
+    const newType = getRoundType(roundValue);
+    const newSeconds = getRoundSeconds(roundValue);
 
     return (
       <Countdown
         type={newType}
         seconds={newSeconds}
-        currentRound={currentRound}
+        currentRound={roundValue}
         totalRounds={configTotalRounds}
         updateCurrentRound={updateRound}
       />
     );
   };
 
-  // TODO: Flip this around, make a method that takes as argumente the current round number
-  //  and returns the exact Countdown component for that round
-  const countDown = useMemo(() => {
-    return getCountdown();
-  }, [currentRound]);
+  const countdown = useMemo(() => {
+    return getCountdown(currentRound);
+  }, [showCountdown, currentRound]);
 
   return (
-    <IonPage>
+    <IonPage className="page-wrapper-center">
       {!showCountdown && <ConfigList onStart={startCountdown} />}
-      {showCountdown && countDown}
+      {showCountdown && countdown}
     </IonPage>
   );
 };

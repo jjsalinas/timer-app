@@ -13,13 +13,19 @@
 .timecount-wrapper {
     height: 80%;
     min-height: 20rem;
+    min-width: 30rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
-.timecount-text {
+.timecount-text > h1 {
     font-size: 20rem;
 }
 
 .timecount-footer {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

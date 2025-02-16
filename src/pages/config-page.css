@@ -1,9 +1,10 @@
-.content-wrapper-center {
-    width: 50%;
-    height: 50%;
-    /* display: flex;
+.page-wrapper-center {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
-    align-items: center; */
-    transform: translateX(50%) translateY(33%);
+    align-items: center;
+    /* transform: translateX(50%) translateY(33%); */
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { CountdownProps } from "./props";
-import { CountdownKind } from "./types";
 import {
   IonButton,
   IonFooter,
@@ -8,6 +7,8 @@ import {
   IonText,
   IonToolbar,
 } from "@ionic/react";
+import { playSkipForwardOutline, playSkipBackOutline } from "ionicons/icons";
+import "./styles.css";
 
 const Countdown: React.FC<CountdownProps> = ({
   type,
@@ -17,10 +18,28 @@ const Countdown: React.FC<CountdownProps> = ({
   updateCurrentRound,
 }: CountdownProps) => {
   const [tickingSecond, setTickingSecond] = useState<number>(seconds);
-  const styleClassName = `countdown-${type.toString()}`;
+  const [timeouts, setTimeouts] = useState<NodeJS.Timeout[]>([]);
+  const styleClassName = `countdown-${type}`; // TODO: fix this naming, reads de number value of the enum
+
+  const clearTimeouts = () => {
+    timeouts.forEach((id) => {
+      clearTimeout(id);
+    });
+    setTimeouts([]);
+  };
 
   const resetCount = () => {
-    setTickingSecond(seconds);
+    if (tickingSecond !== seconds) {
+      clearTimeouts();
+      setTickingSecond(seconds);
+    }
+  };
+
+  const backOneRound = () => {
+    if (currentRound > 1) {
+      clearTimeouts();
+      updateCurrentRound(true);
+    }
   };
 
   const finishCount = () => {
@@ -28,39 +47,27 @@ const Countdown: React.FC<CountdownProps> = ({
   };
 
   const tickOneSecond = () => {
-    return new Promise(() =>
-      setTimeout(() => setTickingSecond(tickingSecond - 1), 1000),
-    );
-  };
-
-  const handleTick = async () => {
-    await tickOneSecond();
+    const id = setTimeout(() => setTickingSecond(tickingSecond - 1), 1000);
+    setTimeouts([...timeouts, id]);
   };
 
   useEffect(() => {
-    resetCount();
-  }, []);
-
-  useEffect(() => {
-    // console.log("tic tac --:", tickingSecond);
     if (tickingSecond === 0) {
+      clearTimeouts();
       updateCurrentRound();
     }
     if (tickingSecond > 0) {
-      handleTick();
+      tickOneSecond();
     }
   }, [tickingSecond]);
 
   useEffect(() => {
-    if (tickingSecond === 0) {
-      resetCount();
-    }
+    resetCount();
   }, [currentRound]);
 
   /*
     TODO: Styling
-    Footer on horizontal flex.
-    Forward button logic fix.
+    Add ticky sounds for last 3 seconds, ending with a higher pitch sound on 0, on finishing
   */
   return (
     <>
@@ -73,21 +80,22 @@ const Countdown: React.FC<CountdownProps> = ({
         <IonFooter>
           <IonToolbar>
             <div className="timecount-footer">
-              <IonButton shape="round" size="small" onClick={resetCount}>
-                <IonIcon
-                  slot="icon-only"
-                  name="play-skip-back-outline"
-                ></IonIcon>
+              <IonButton
+                shape="round"
+                onClick={resetCount}
+                onDoubleClick={backOneRound}
+              >
+                <IonIcon slot="icon-only" icon={playSkipBackOutline}></IonIcon>
               </IonButton>
               <IonText>
                 <h3>
                   {currentRound} / {totalRounds}
                 </h3>
               </IonText>
-              <IonButton shape="round" size="small" onClick={finishCount}>
+              <IonButton shape="round" onClick={finishCount}>
                 <IonIcon
                   slot="icon-only"
-                  name="play-skip-forward-outline"
+                  icon={playSkipForwardOutline}
                 ></IonIcon>
               </IonButton>
             </div>

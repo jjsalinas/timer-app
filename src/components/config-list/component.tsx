@@ -66,6 +66,7 @@ const ConfigList: React.FC<ConfigListProps> = ({
   };
 
   return (
+    // <div>
     <div className="content-wrapper-center">
       <IonContent>
         <IonList lines="none">
