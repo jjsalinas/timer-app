@@ -18,6 +18,9 @@ import { ConfigListProps } from "./props";
 
 const ConfigList: React.FC<ConfigListProps> = ({
   onStart,
+  initialRounds,
+  initialWaitDuration,
+  initialActiveDuration,
 }: ConfigListProps) => {
   /*
     | Icon-description ------ numberSetter(configItemValue, configItemValueUpdater()) |
@@ -25,9 +28,11 @@ const ConfigList: React.FC<ConfigListProps> = ({
 
     [Start button]
   */
-  const [roundsValue, setRoundsValue] = useState<number>(5);
-  const [activityValue, setActivityValue] = useState<number>(30);
-  const [waitValue, setWaitValue] = useState<number>(10);
+  const [roundsValue, setRoundsValue] = useState<number>(initialRounds ?? 5);
+  const [activeValue, setActiveValue] = useState<number>(
+    initialActiveDuration ?? 30,
+  );
+  const [waitValue, setWaitValue] = useState<number>(initialWaitDuration ?? 10);
 
   const rounds: ConfigItem = {
     icon: reload,
@@ -39,8 +44,8 @@ const ConfigList: React.FC<ConfigListProps> = ({
   const activities: ConfigItem = {
     icon: barbell,
     description: "Active time per round",
-    initialValue: activityValue,
-    valueUpdater: setActivityValue,
+    initialValue: activeValue,
+    valueUpdater: setActiveValue,
   };
 
   const inBetweens: ConfigItem = {
@@ -76,7 +81,7 @@ const ConfigList: React.FC<ConfigListProps> = ({
         </IonList>
         <div className="button-wrapper-center">
           <IonButton
-            onClick={() => onStart(roundsValue, activityValue, waitValue)}
+            onClick={() => onStart(roundsValue, activeValue, waitValue)}
           >
             START
           </IonButton>

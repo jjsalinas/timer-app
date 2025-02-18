@@ -66,8 +66,10 @@ const Countdown: React.FC<CountdownProps> = ({
   }, [currentRound]);
 
   /*
-    TODO: Styling
-    Add ticky sounds for last 3 seconds, ending with a higher pitch sound on 0, on finishing
+    TODO:
+    - Styling.
+    - Add ticky sounds for last 3 seconds,
+      ending with a higher pitch sound on 0, on finishing.
   */
   return (
     <>

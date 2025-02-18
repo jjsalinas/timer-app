@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   IonButton,
   IonIcon,
@@ -28,12 +28,14 @@ const NumberSetter: React.FC<NumberSetterProps> = ({
     if (inputCmp !== null) {
       inputCmp.value = filteredValue;
     }
-
-    // If value from parent, call parent update method
-    if (updateValue) {
-      updateValue(Number(filteredValue));
-    }
   };
+
+  useEffect(() => {
+    // If value comes from parent, call parent update method
+    if (updateValue) {
+      updateValue(value);
+    }
+  }, [value]);
 
   return (
     <div id="container">

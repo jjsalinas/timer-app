@@ -4,4 +4,7 @@ export interface ConfigListProps {
     activeDuration: number,
     waitDuration: number,
   ) => void;
+  initialRounds?: number;
+  initialActiveDuration?: number;
+  initialWaitDuration?: number;
 }
