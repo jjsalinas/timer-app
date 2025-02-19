@@ -1,5 +1,5 @@
 export enum CountdownKind {
-  "starting",
-  "countdown",
-  "intermission",
+  starting = "starting",
+  countdown = "countdown",
+  intermission = "intermission",
 }

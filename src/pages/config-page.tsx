@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { barbell, hourglass, reload } from "ionicons/icons";
-import { IonPage } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import "./config-page.css";
 import ConfigList from "../components/config-list/component";
 import Countdown from "../components/countdown/component";
@@ -42,6 +42,11 @@ const ConfigPage: React.FC = () => {
       setConfigWaitDuration(waitDuration);
       setShowCountdown(true);
     }
+  };
+
+  const cancelCountdown = () => {
+    setShowCountdown(false);
+    setCurrentRound(1);
   };
 
   const updateRound = (backwards?: boolean) => {
@@ -94,6 +99,7 @@ const ConfigPage: React.FC = () => {
         currentRound={roundValue}
         totalRounds={totalRoundsValue}
         updateCurrentRound={updateRound}
+        cancelAction={cancelCountdown}
       />
     );
   };
@@ -103,16 +109,18 @@ const ConfigPage: React.FC = () => {
   }, [showCountdown, currentRound]);
 
   return (
-    <IonPage className="page-wrapper-center">
-      {!showCountdown && (
-        <ConfigList
-          onStart={startCountdown}
-          initialRounds={configRounds}
-          initialActiveDuration={configActiveDuration}
-          initialWaitDuration={configWaitDuration}
-        />
-      )}
-      {showCountdown && countdown}
+    <IonPage>
+      <IonContent fullscreen>
+        {!showCountdown && (
+          <ConfigList
+            onStart={startCountdown}
+            initialRounds={configRounds}
+            initialActiveDuration={configActiveDuration}
+            initialWaitDuration={configWaitDuration}
+          />
+        )}
+        {showCountdown && countdown}
+      </IonContent>
     </IonPage>
   );
 };

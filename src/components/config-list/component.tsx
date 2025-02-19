@@ -36,21 +36,24 @@ const ConfigList: React.FC<ConfigListProps> = ({
 
   const rounds: ConfigItem = {
     icon: reload,
-    description: "Number of rounds",
+    // description: "Number of rounds",
+    description: "# rounds",
     initialValue: roundsValue,
     valueUpdater: setRoundsValue,
   };
 
   const activities: ConfigItem = {
     icon: barbell,
-    description: "Active time per round",
+    // description: "Active time per round",
+    description: "Active time (s)",
     initialValue: activeValue,
     valueUpdater: setActiveValue,
   };
 
   const inBetweens: ConfigItem = {
     icon: hourglass,
-    description: "In between time per round",
+    // description: "In between time per round",
+    description: "Pause time (s)",
     initialValue: waitValue,
     valueUpdater: setWaitValue,
   };
@@ -60,7 +63,11 @@ const ConfigList: React.FC<ConfigListProps> = ({
       <>
         <IonItem>
           <IonIcon icon={item.icon} color="white" slot="start" />
-          {item.description && <IonLabel>{item.description}</IonLabel>}
+          {item.description && (
+            <IonLabel className="config-item-label">
+              {item.description}
+            </IonLabel>
+          )}
           <NumberSetter
             initValue={item.initialValue}
             updateValue={item.valueUpdater}

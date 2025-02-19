@@ -1,11 +1,11 @@
 .content-wrapper-center {
-    width: 70%;
+    max-width: 66%;
     height: 50%;
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
-    /* transform: translateX(50%) translateY(33%); */
+    transform: translateX(25%) translateY(66%);
 }
 
 .button-wrapper-center {
@@ -14,3 +14,7 @@
     align-content: center;
     align-items: center;
 }
+
+/* .config-item-label {
+
+} */

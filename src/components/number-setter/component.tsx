@@ -1,10 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  IonButton,
-  IonIcon,
-  IonInput,
-  HTMLIonInputElement,
-} from "@ionic/react";
+import { IonButton, IonIcon, IonInput } from "@ionic/react";
 import { add, remove } from "ionicons/icons";
 import "./styles.css";
 

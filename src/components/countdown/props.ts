@@ -6,4 +6,5 @@ export interface CountdownProps {
   currentRound: number;
   totalRounds: number;
   updateCurrentRound: (backwards?: boolean) => void;
+  cancelAction: () => void;
 }

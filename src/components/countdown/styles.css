@@ -1,32 +1,49 @@
-.countdown-starting {
-    background-color: green;
-}
-
-.countdown-countdown {
-    background-color: red;
-}
-
-.countdown-intermission {
-    background-color: blue;
-}
-
-.timecount-wrapper {
-    height: 80%;
-    min-height: 20rem;
-    min-width: 30rem;
+.countdown-wrapper {
+    height: 100%;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
     align-items: center;
+}
+
+.countdown-starting {
+    background-color: #2a63f5;
+    mainStyles;
+}
+
+.countdown-countdown {
+    background-color: #25be5b;
+    mainStyles;
+}
+
+.countdown-intermission {
+    background-color: #be253a;
+    mainStyles;
 }
 
 .timecount-text > h1 {
     font-size: 20rem;
 }
 
+.timecount-footer-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
 .timecount-footer {
-    width: 100%;
+    width: 30%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.timecount-footer-actions {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
