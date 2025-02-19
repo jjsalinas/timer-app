@@ -28,7 +28,12 @@
 }
 
 .timecount-text > h1 {
-    font-size: 20rem;
+    @media (max-width: 1250px) {
+        font-size: 18rem;
+    }
+    @media (min-width: 1250px) {
+        font-size: 25rem;
+    }
 }
 
 .timecount-footer-controls {
