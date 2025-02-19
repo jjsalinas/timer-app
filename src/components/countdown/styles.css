@@ -1,5 +1,5 @@
 .countdown-wrapper {
-    height: 90%;
+    height: 85%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -32,6 +32,7 @@
 }
 
 .timecount-footer-controls {
+    height: 15%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,7 +41,12 @@
 }
 
 .timecount-footer {
-    width: 30%;
+    @media (max-width: 1250px) {
+        width: 90%;
+    }
+    @media (min-width: 1250px) {
+        width: 30%;
+    }
     display: flex;
     flex-direction: row;
     justify-content: space-between;

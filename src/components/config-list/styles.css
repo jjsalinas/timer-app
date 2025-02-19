@@ -1,11 +1,18 @@
 .content-wrapper-center {
-    max-width: 66%;
+    @media (max-width: 1250px) {
+        max-width: 100%;
+        transform: translateY(66%);
+    }
+    @media (min-width: 1250px) {
+        max-width: 66%;
+        transform: translateX(25%) translateY(66%);
+    }
+
     height: 50%;
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
-    transform: translateX(25%) translateY(66%);
 }
 
 .button-wrapper-center {
