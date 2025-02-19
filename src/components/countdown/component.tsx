@@ -15,6 +15,7 @@ import {
   stopCircleOutline,
 } from "ionicons/icons";
 import "./styles.css";
+import { CountdownKind } from "./types";
 
 const Countdown: React.FC<CountdownProps> = ({
   type,
@@ -90,6 +91,9 @@ const Countdown: React.FC<CountdownProps> = ({
     <>
       <div className={`countdown-wrapper ${styleClassName}`}>
         <IonText className="timecount-text">
+          {type === CountdownKind.starting && <h4>Starting in...</h4>}
+          {/* {type === CountdownKind.countdown && <h4>GO! GO! GO!</h4>}
+          {type === CountdownKind.intermission && <h4>Breathe</h4>} */}
           <h1>{tickingSecond}</h1>
         </IonText>
       </div>
