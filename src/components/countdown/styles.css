@@ -10,17 +10,14 @@
 
 .countdown-starting {
     background-color: #2a63f5;
-    mainStyles;
 }
 
 .countdown-countdown {
     background-color: #25be5b;
-    mainStyles;
 }
 
 .countdown-intermission {
     background-color: #be253a;
-    mainStyles;
 }
 
 .timecount-text {
@@ -28,7 +25,6 @@
     flex-direction: column;
     align-content: center;
     align-items: center;
-
 }
 
 .timecount-text > h1 {
