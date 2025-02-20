@@ -24,11 +24,21 @@ const NumberSetter: React.FC<NumberSetterProps> = ({
       inputCmp.value = filteredValue;
     }
   };
+  const audioTicTacRef = useRef<HTMLAudioElement>(null);
+  const audioBellRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     // If value comes from parent, call parent update method
     if (updateValue) {
       updateValue(value);
+    }
+    if (initValue && initValue > 5) {
+      if (initValue === 3) {
+        audioTicTacRef.current?.play();
+      }
+      if (initValue === 0) {
+        audioBellRef.current?.play();
+      }
     }
   }, [value]);
 
@@ -51,6 +61,10 @@ const NumberSetter: React.FC<NumberSetterProps> = ({
       <IonButton shape="round" size="small" onClick={() => setValue(value + 1)}>
         <IonIcon slot="icon-only" icon={add}></IonIcon>
       </IonButton>
+      <>
+        <audio src={"../assets/tic-tac.mp3"} ref={audioTicTacRef} />
+        <audio src={"../assets/winner-bell-game-show.mp3"} ref={audioBellRef} />
+      </>
     </div>
   );
 };

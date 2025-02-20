@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CountdownProps } from "./props";
 import {
   IonButton,
@@ -16,6 +16,8 @@ import {
 } from "ionicons/icons";
 import "./styles.css";
 import { CountdownKind } from "./types";
+import TICTAC_SOUND from "../../assets/tic-tac.mp3";
+import BELL_SOUND from "../../assets/winner-bell-game-show.mp3";
 
 const Countdown: React.FC<CountdownProps> = ({
   type,
@@ -67,6 +69,9 @@ const Countdown: React.FC<CountdownProps> = ({
     }
   };
 
+  const audioTicTacRef = useRef<HTMLAudioElement>(null);
+  const audioBellRef = useRef<HTMLAudioElement>(null);
+
   useEffect(() => {
     if (tickingSecond === 0) {
       clearTimeouts();
@@ -74,6 +79,15 @@ const Countdown: React.FC<CountdownProps> = ({
     }
     if (tickingSecond > 0) {
       tickOneSecond();
+    }
+
+    // Play clock ticking for last 3 seconds if round is longer than 5
+    if (seconds > 5 && tickingSecond === 3) {
+      audioTicTacRef.current?.play();
+    }
+    // Play bell sound when round finishes
+    if (tickingSecond === 0) {
+      audioBellRef.current?.play();
     }
   }, [tickingSecond]);
 
@@ -136,6 +150,10 @@ const Countdown: React.FC<CountdownProps> = ({
           </IonButton>
         </div>
       </IonFooter>
+      <>
+        <audio src={TICTAC_SOUND} ref={audioTicTacRef} />
+        <audio src={BELL_SOUND} ref={audioBellRef} />
+      </>
     </>
   );
 };
