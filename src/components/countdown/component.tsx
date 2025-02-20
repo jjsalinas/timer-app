@@ -130,7 +130,7 @@ const Countdown: React.FC<CountdownProps> = ({
           </IonButton>
         </div>
         <div className="timecount-footer-actions">
-          <IonButton onClick={pauseCount}>
+          <IonButton onClick={pauseCount} style={{ width: "10rem" }}>
             {timeouts.length > 0 && (
               <>
                 <IonText>Pause</IonText>
@@ -144,7 +144,7 @@ const Countdown: React.FC<CountdownProps> = ({
               </>
             )}
           </IonButton>
-          <IonButton onClick={cancelAction}>
+          <IonButton onClick={cancelAction} style={{ width: "10rem" }}>
             Stop
             <IonIcon slot="end" icon={stopCircleOutline}></IonIcon>
           </IonButton>

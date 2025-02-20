@@ -89,6 +89,7 @@ const ConfigList: React.FC<ConfigListProps> = ({
         <div className="button-wrapper-center">
           <IonButton
             onClick={() => onStart(roundsValue, activeValue, waitValue)}
+            style={{ width: "10rem" }}
           >
             START
           </IonButton>
