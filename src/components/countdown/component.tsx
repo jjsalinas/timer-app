@@ -1,12 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CountdownProps } from "./props";
-import {
-  IonButton,
-  IonFooter,
-  IonIcon,
-  IonText,
-  IonToolbar,
-} from "@ionic/react";
+import { IonButton, IonFooter, IonIcon, IonText } from "@ionic/react";
 import {
   playSkipForwardOutline,
   playSkipBackOutline,
