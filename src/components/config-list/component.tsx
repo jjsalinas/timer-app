@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import {
-  IonPage,
   IonContent,
   IonList,
   IonItem,
@@ -36,7 +35,6 @@ const ConfigList: React.FC<ConfigListProps> = ({
 
   const rounds: ConfigItem = {
     icon: reload,
-    // description: "Number of rounds",
     description: "# rounds",
     initialValue: roundsValue,
     valueUpdater: setRoundsValue,
@@ -44,7 +42,6 @@ const ConfigList: React.FC<ConfigListProps> = ({
 
   const activities: ConfigItem = {
     icon: barbell,
-    // description: "Active time per round",
     description: "Active time (s)",
     initialValue: activeValue,
     valueUpdater: setActiveValue,
@@ -52,7 +49,6 @@ const ConfigList: React.FC<ConfigListProps> = ({
 
   const inBetweens: ConfigItem = {
     icon: hourglass,
-    // description: "In between time per round",
     description: "Pause time (s)",
     initialValue: waitValue,
     valueUpdater: setWaitValue,
@@ -78,7 +74,6 @@ const ConfigList: React.FC<ConfigListProps> = ({
   };
 
   return (
-    // <div>
     <div className="content-wrapper-center">
       <IonContent>
         <IonList lines="none">

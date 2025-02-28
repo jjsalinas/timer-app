@@ -1,7 +1,5 @@
 import { useMemo, useState } from "react";
-import { barbell, hourglass, reload } from "ionicons/icons";
 import { IonContent, IonPage } from "@ionic/react";
-import "./config-page.css";
 import ConfigList from "../components/config-list/component";
 import Countdown from "../components/countdown/component";
 import { CountdownKind } from "../components/countdown/types";
@@ -10,6 +8,10 @@ const DEFAULT_ROUNDS_VALUE = 5;
 const DEFAULT_ACTIVE_TIME_VALUE = 30;
 const DEFAULT_WAIT_TIME_VALUE = 10;
 
+/*
+  TODO:
+  - Extra sounding bell when last round finishes
+*/
 const ConfigPage: React.FC = () => {
   const [showCountdown, setShowCountdown] = useState<boolean>(false);
   const [currentRound, setCurrentRound] = useState<number>(1);

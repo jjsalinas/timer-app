@@ -89,12 +89,6 @@ const Countdown: React.FC<CountdownProps> = ({
     resetCount();
   }, [currentRound]);
 
-  /*
-    TODO:
-    - Styling.
-    - Add ticky sounds for last 3 seconds,
-      ending with a higher pitch sound on 0, on finishing.
-  */
   return (
     <>
       <div className={`countdown-wrapper ${styleClassName}`}>

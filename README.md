@@ -30,14 +30,16 @@ $ npx cap run android
     <td>Break part</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot01.png" width=300 height=570></td>
-    <td><img src="screenshots/screenshot02.png" width=300 height=570></td>
-    <td><img src="screenshots/screenshot03.png" width=300 height=570></td>
+    <td><img src="screenshots/screenshot01.png" width="320" height="680"></td>
+    <td><img src="screenshots/screenshot02.png" width="320" height="680"></td>
+    <td><img src="screenshots/screenshot03.png" width="320" height="680"></td>
   </tr>
- </table>
+</table>
 <table>
   <tr>
-    <td><img src="screenshots/screenshot04.png" width=670 height=480></td>
-    <td><img src="screenshots/screenshot05.png" width=670 height=480></td>
+    <td><img src="screenshots/screenshot04.png" width="720" height="500"></td>
   </tr>
- </table>
+  <tr>
+    <td><img src="screenshots/screenshot05.png" width="720" height="500"></td>
+  </tr>
+</table>
