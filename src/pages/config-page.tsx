@@ -1,17 +1,16 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IonContent, IonPage } from "@ionic/react";
 import ConfigList from "../components/config-list/component";
 import Countdown from "../components/countdown/component";
 import { CountdownKind } from "../components/countdown/types";
+import { preloadAllAudio, stopAllAudio } from "../utils/audio-utils";
+import {
+  DEFAULT_ROUNDS_VALUE,
+  DEFAULT_ACTIVE_TIME_VALUE,
+  DEFAULT_WAIT_TIME_VALUE,
+  STARTING_ROUND_DURATION,
+} from "../constants";
 
-const DEFAULT_ROUNDS_VALUE = 5;
-const DEFAULT_ACTIVE_TIME_VALUE = 30;
-const DEFAULT_WAIT_TIME_VALUE = 10;
-
-/*
-  TODO:
-  - Extra sounding bell when last round finishes
-*/
 const ConfigPage: React.FC = () => {
   const [showCountdown, setShowCountdown] = useState<boolean>(false);
   const [currentRound, setCurrentRound] = useState<number>(1);
@@ -24,8 +23,9 @@ const ConfigPage: React.FC = () => {
     DEFAULT_WAIT_TIME_VALUE,
   );
 
-  // Total round count = Starting 1 + (1 active + 1 pause) per (round)
-  const totalRounds = () => configRounds * 2 + 1;
+  // Total round count = 2 * number of rounds
+  // // It would be +1 for the starting round, but is also -1. Last round finishes after active part
+  const totalRounds = () => configRounds * 2;
   const totalRoundsValue = useMemo(() => totalRounds(), [configRounds]);
 
   const startCountdown = (
@@ -46,9 +46,10 @@ const ConfigPage: React.FC = () => {
     }
   };
 
-  const cancelCountdown = () => {
+  const cancelCountdown = async () => {
     setShowCountdown(false);
     setCurrentRound(1);
+    await stopAllAudio();
   };
 
   const updateRound = (backwards?: boolean) => {
@@ -78,7 +79,7 @@ const ConfigPage: React.FC = () => {
   const getRoundSeconds = (roundValue: number) => {
     const roundType = getRoundType(roundValue);
     if (roundType === CountdownKind.starting) {
-      return 5;
+      return STARTING_ROUND_DURATION;
     }
     if (roundType === CountdownKind.countdown) {
       return configActiveDuration;
@@ -109,6 +110,11 @@ const ConfigPage: React.FC = () => {
   const countdown = useMemo(() => {
     return getCountdown(currentRound);
   }, [showCountdown, currentRound]);
+
+  useEffect(() => {
+    // Get native-audio capacitor to load all mp3 audios here
+    preloadAllAudio();
+  }, []);
 
   return (
     <IonPage>

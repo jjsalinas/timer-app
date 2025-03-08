@@ -33,7 +33,7 @@ const NumberSetter: React.FC<NumberSetterProps> = ({
   }, [value]);
 
   return (
-    <div id="container">
+    <div className="container">
       <IonButton
         shape="round"
         size="small"

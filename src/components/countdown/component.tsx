@@ -10,8 +10,7 @@ import {
 } from "ionicons/icons";
 import "./styles.css";
 import { CountdownKind } from "./types";
-import TICTAC_SOUND from "../../assets/tic-tac.mp3";
-import BELL_SOUND from "../../assets/winner-bell-game-show.mp3";
+import { audioIds, playAudio, stopAllAudio } from "../../utils/audio-utils";
 
 const Countdown: React.FC<CountdownProps> = ({
   type,
@@ -23,7 +22,7 @@ const Countdown: React.FC<CountdownProps> = ({
 }: CountdownProps) => {
   const [tickingSecond, setTickingSecond] = useState<number>(seconds);
   const [timeouts, setTimeouts] = useState<NodeJS.Timeout[]>([]);
-  const styleClassName = `countdown-${type}`; // TODO: fix this naming, reads de number value of the enum
+  const styleClassName = `countdown-${type}`;
 
   const clearTimeouts = () => {
     timeouts.forEach((id) => {
@@ -32,22 +31,27 @@ const Countdown: React.FC<CountdownProps> = ({
     setTimeouts([]);
   };
 
-  const resetCount = () => {
+  const resetCount = async (paramItem?: { stopSounds?: boolean }) => {
     if (tickingSecond !== seconds) {
       clearTimeouts();
       setTickingSecond(seconds);
     }
-  };
-
-  const backOneRound = () => {
-    if (currentRound > 1) {
-      clearTimeouts();
-      updateCurrentRound(true);
+    if (paramItem?.stopSounds === true) {
+      await stopAllAudio();
     }
   };
 
-  const finishCount = () => {
+  const backOneRound = async () => {
+    if (currentRound > 1) {
+      clearTimeouts();
+      updateCurrentRound(true);
+      await stopAllAudio();
+    }
+  };
+
+  const finishCount = async () => {
     setTickingSecond(0);
+    await stopAllAudio();
   };
 
   const tickOneSecond = () => {
@@ -55,16 +59,13 @@ const Countdown: React.FC<CountdownProps> = ({
     setTimeouts([...timeouts, id]);
   };
 
-  const pauseCount = () => {
+  const pauseCount = async () => {
     if (timeouts.length > 0) {
       clearTimeouts();
     } else {
       tickOneSecond();
     }
   };
-
-  const audioTicTacRef = useRef<HTMLAudioElement>(null);
-  const audioBellRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     if (tickingSecond === 0) {
@@ -77,11 +78,15 @@ const Countdown: React.FC<CountdownProps> = ({
 
     // Play clock ticking for last 3 seconds if round is longer than 5
     if (seconds > 5 && tickingSecond === 3) {
-      audioTicTacRef.current?.play();
+      playAudio(audioIds.ticTac);
     }
     // Play bell sound when round finishes
-    if (tickingSecond === 0) {
-      audioBellRef.current?.play();
+    if (tickingSecond === 0 && currentRound !== totalRounds) {
+      playAudio(audioIds.bell);
+    }
+    // Play ending bell sound when last round finishes
+    if (tickingSecond === 0 && currentRound === totalRounds) {
+      playAudio(audioIds.end);
     }
   }, [tickingSecond]);
 
@@ -103,8 +108,8 @@ const Countdown: React.FC<CountdownProps> = ({
         <div className="timecount-footer">
           <IonButton
             shape="round"
-            onClick={resetCount}
-            onDoubleClick={backOneRound}
+            onClick={async () => await resetCount({ stopSounds: true })}
+            onDoubleClick={async () => backOneRound()}
           >
             <IonIcon slot="icon-only" icon={playSkipBackOutline}></IonIcon>
           </IonButton>
@@ -113,7 +118,7 @@ const Countdown: React.FC<CountdownProps> = ({
               {currentRound} / {totalRounds}
             </h3>
           </IonText>
-          <IonButton shape="round" onClick={finishCount}>
+          <IonButton shape="round" onClick={async () => await finishCount()}>
             <IonIcon slot="icon-only" icon={playSkipForwardOutline}></IonIcon>
           </IonButton>
         </div>
@@ -138,10 +143,6 @@ const Countdown: React.FC<CountdownProps> = ({
           </IonButton>
         </div>
       </IonFooter>
-      <>
-        <audio src={TICTAC_SOUND} ref={audioTicTacRef} />
-        <audio src={BELL_SOUND} ref={audioBellRef} />
-      </>
     </>
   );
 };

@@ -1,0 +1,4 @@
+export const DEFAULT_ROUNDS_VALUE = 5;
+export const DEFAULT_ACTIVE_TIME_VALUE = 30;
+export const DEFAULT_WAIT_TIME_VALUE = 10;
+export const STARTING_ROUND_DURATION = 5;

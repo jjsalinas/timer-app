@@ -21,7 +21,20 @@
     align-content: center;
     align-items: center;
 }
-
-/* .config-item-label {
-
-} */
+.list-item-end-position-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.list-item-end-position-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 1250px) {
+        width: 8rem;
+    }
+    @media (min-width: 1250px) {
+        width: 15rem;
+    }
+}
