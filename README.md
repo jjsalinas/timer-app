@@ -11,7 +11,7 @@ On the bottom there are controls.<br>
 Rounds can be skipped, reset or go back to a previous round (double tap on back button)
 
 ### Sound
-For the sounds you can hear when the countdown is about to reach 0 [`native-audio`](https://github.com/capacitor-community/native-audio) capacitor is used.
+For the sounds you can hear when the countdown is about to reach 0 [`native-audio`](https://github.com/Cap-go/capacitor-native-audio) capacitor is used.
 
 ## Configuration
 For trying out the repo, the web app can be run locally with
