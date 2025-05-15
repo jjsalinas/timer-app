@@ -47,6 +47,23 @@
     }
 }
 
+.text-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.text-wrapper h1 {
+    @media (max-width: 1000px) {
+        font-size: 15rem;
+    }
+    @media (min-width: 1001px) and (max-width: 1249px) {
+        font-size: 17rem;
+    }
+    @media (min-width: 1250px) {
+        font-size: 25rem;
+    }
+}
+
 .timecount-footer-controls {
     height: 15%;
     display: flex;
