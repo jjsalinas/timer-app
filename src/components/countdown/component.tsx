@@ -11,6 +11,7 @@ import {
 import "./styles.css";
 import { CountdownKind } from "./types";
 import { audioIds, playAudio, stopAllAudio } from "../../utils/audio-utils";
+import { animate, createScope, Scope } from 'animejs';
 
 const Countdown: React.FC<CountdownProps> = ({
   type,
@@ -23,6 +24,8 @@ const Countdown: React.FC<CountdownProps> = ({
   const [tickingSecond, setTickingSecond] = useState<number>(seconds);
   const [timeouts, setTimeouts] = useState<NodeJS.Timeout[]>([]);
   const styleClassName = `countdown-${type}`;
+  const root = useRef(null);
+  const scope = useRef<Scope | null>(null);
 
   const clearTimeouts = () => {
     timeouts.forEach((id) => {
@@ -68,6 +71,23 @@ const Countdown: React.FC<CountdownProps> = ({
   };
 
   useEffect(() => {
+    scope.current = createScope({ root }).add( self => {
+      animate('.second', {
+        y: '10rem',
+        duration: 1010,
+        rotate: 0,
+        ease: 'inQuad',
+        loop: true,
+      });
+    });
+
+    // cleanup all anime.js instances declared inside the scope
+    return () => scope?.current?.revert()
+
+  }, [tickingSecond]);
+
+
+  useEffect(() => {
     if (tickingSecond === 0) {
       clearTimeouts();
       updateCurrentRound();
@@ -96,12 +116,20 @@ const Countdown: React.FC<CountdownProps> = ({
 
   return (
     <>
-      <div className={`countdown-wrapper ${styleClassName}`}>
+      <div className={`countdown-wrapper ${styleClassName}`} ref={root}>
         <IonText className="timecount-text">
           {type === CountdownKind.starting && <h4>Starting in...</h4>}
           {/* {type === CountdownKind.countdown && <h4>GO! GO! GO!</h4>}
           {type === CountdownKind.intermission && <h4>Breathe</h4>} */}
-          <h1>{tickingSecond}</h1>
+          { tickingSecond.toString().length === 1 && 
+            <h1 className="second">{tickingSecond}</h1>
+          }
+          { tickingSecond.toString().length > 1 && 
+          <div className="text-wrapper">
+              <h1>{tickingSecond.toString().split('').slice(0, tickingSecond.toString().length - 1)}</h1>
+              <h1 className="second">{tickingSecond.toString().split('').at(-1)}</h1>
+            </div>
+          }
         </IonText>
       </div>
       <IonFooter className="timecount-footer-controls">
