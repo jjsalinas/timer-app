@@ -30,8 +30,8 @@
     "react-router-dom": "^5.3.4"
   },
   "devDependencies": {
-    "@capacitor/cli": "7.0.1",
-    "@testing-library/dom": ">=7.21.4",
+    "@capacitor/cli": "^8.0.1",
+    "@testing-library/dom": "^7.21.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
@@ -42,6 +42,7 @@
     "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
     "jsdom": "^22.1.0",
+    "tar": "^7.5.3",
     "terser": "^5.4.0",
     "typescript": "^5.1.6",
     "vite": "7.3.0",
