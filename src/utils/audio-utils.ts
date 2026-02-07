@@ -9,9 +9,9 @@ export enum audioIds {
 }
 
 enum audioFiles {
-  ticTac = "/assets/tic-tac.mp3",
-  bell = "/assets/winner-bell-game-show.mp3",
-  end = "/assets/goodresult.mp3",
+  ticTac = "assets/tic-tac.mp3",
+  bell = "assets/winner-bell-game-show.mp3",
+  end = "assets/goodresult.mp3",
 }
 
 export const preloadAllAudio = async () => {
