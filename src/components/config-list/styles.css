@@ -1,18 +1,67 @@
 .content-wrapper-center {
-    @media (max-width: 1250px) {
+    @media (max-width: 900px) {
         max-width: 100%;
-        transform: translateY(66%);
+        height: 100%;
     }
-    @media (min-width: 1250px) {
+    @media (min-width: 901px) {
         max-width: 66%;
+        height: 50%;
         transform: translateX(25%) translateY(66%);
     }
 
-    height: 50%;
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
+}
+
+.content-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+     @media (max-width: 900px) {
+         height: 100%;
+     }
+
+     @media (min-width: 901px) {
+         height: 60%;
+     }
+
+}
+
+.config-item-wrapper {
+    display: flex;
+    min-height: fit-content;
+     @media (max-width: 900px) {
+         flex-direction: column;
+         align-items: center;
+         margin: 0;
+     }
+
+     @media (min-width: 901px) {
+         flex-direction: row;
+         justify-content: space-between;
+     }
+    width: 100%;
+}
+
+.config-item-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 2rem;
+    @media (max-width: 900px) {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    @media (min-width: 901px) {
+        width: 100%;
+    }
+    gap: 1rem;
+
 }
 
 .button-wrapper-center {
@@ -20,21 +69,30 @@
     justify-content: center;
     align-content: center;
     align-items: center;
+    /*gap: 1rem;*/
 }
 .list-item-end-position-wrapper {
     display: flex;
     flex-direction: row;
+    @media (max-width: 900px) {
+        justify-content: center;
+    }
+    @media (min-width: 901px) {
     justify-content: flex-end;
+    }
 }
 .list-item-end-position-item {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    @media (max-width: 1250px) {
-        width: 8rem;
+    font-size: 1.5rem;
+    @media (max-width: 900px) {
+        /*width: 8rem;*/
+        width: fit-content;
     }
-    @media (min-width: 1250px) {
-        width: 15rem;
+    @media (min-width: 901px) {
+        width: 14rem;
+        gap: 1rem;
     }
 }

@@ -3,14 +3,18 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: 1250px) {
-        width: 8rem;
+    @media (max-width: 900px) {
+        width: 10rem;
+        min-width: fit-content;
+        height: 7rem;
     }
-    @media (min-width: 1250px) {
+    @media (min-width: 901px) {
         width: 15rem;
     }
 }
 
 ion-input.custom {
-    max-width: 2rem;
+    max-width: 5rem;
+    font-size: 2rem;
+    text-align:center;
 }

@@ -22,16 +22,6 @@ const ConfigList: React.FC<ConfigListProps> = ({
   initialWaitDuration,
   initialActiveDuration,
 }: ConfigListProps) => {
-  /*
-    TODO:
-    - Configurable starting round time
-  */
-  /*
-    | Icon-description ------ numberSetter(configItemValue, configItemValueUpdater()) |
-    (...)
-
-    [Start button]
-  */
   const [roundsValue, setRoundsValue] = useState<number>(initialRounds ?? 5);
   const [activeValue, setActiveValue] = useState<number>(
     initialActiveDuration ?? 30,
@@ -74,17 +64,21 @@ const ConfigList: React.FC<ConfigListProps> = ({
   const parseItem = (item: ConfigItem) => {
     return (
       <>
-        <IonItem>
+        <IonItem className="config-item">
+          <div className="config-item-wrapper">
+          <div className="config-item-label">
           <IonIcon icon={item.icon} color="white" slot="start" />
           {item.description && (
-            <IonLabel className="config-item-label">
+            <IonLabel className="config-item-text">
               {item.description}
             </IonLabel>
-          )}
+            )}
+          </div>
           <NumberSetter
             initValue={item.initialValue}
             updateValue={item.valueUpdater}
-          />
+            />
+          </div>
         </IonItem>
       </>
     );
@@ -93,14 +87,14 @@ const ConfigList: React.FC<ConfigListProps> = ({
   return (
     <div className="content-wrapper-center">
       <IonContent>
-        <IonList lines="none">
+        <IonList lines="none" className="content-list">
           {parseItem(rounds)}
           {parseItem(activities)}
           {parseItem(inBetweens)}
           <div className="list-item-end-position-wrapper">
             <IonItem>
               <div className="list-item-end-position-item">
-                <IonLabel>{`Total time ${totalTimeFormatted()}`}</IonLabel>
+                <IonLabel>{"Total time "}<span style={{ border: "1px solid white" }}>{totalTimeFormatted()}</span></IonLabel>
               </div>
             </IonItem>
           </div>
@@ -108,7 +102,7 @@ const ConfigList: React.FC<ConfigListProps> = ({
         <div className="button-wrapper-center">
           <IonButton
             onClick={() => onStart(roundsValue, activeValue, waitValue)}
-            style={{ width: "10rem" }}
+            style={{ width: "10rem", fontSize: "1.5rem" }}
           >
             START
           </IonButton>

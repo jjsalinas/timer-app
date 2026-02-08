@@ -36,7 +36,7 @@ const NumberSetter: React.FC<NumberSetterProps> = ({
     <div className="container">
       <IonButton
         shape="round"
-        size="small"
+        size="default"
         onClick={() => (value > 0 ? setValue(value - 1) : null)}
       >
         <IonIcon slot="icon-only" icon={remove} color="white"></IonIcon>
@@ -48,7 +48,7 @@ const NumberSetter: React.FC<NumberSetterProps> = ({
         placeholder="000"
         value={value}
       ></IonInput>
-      <IonButton shape="round" size="small" onClick={() => setValue(value + 1)}>
+      <IonButton shape="round" size="default" onClick={() => setValue(value + 1)}>
         <IonIcon slot="icon-only" icon={add}></IonIcon>
       </IonButton>
     </div>
