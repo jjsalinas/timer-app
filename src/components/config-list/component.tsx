@@ -94,7 +94,7 @@ const ConfigList: React.FC<ConfigListProps> = ({
           <div className="list-item-end-position-wrapper">
             <IonItem>
               <div className="list-item-end-position-item">
-                <IonLabel>{"Total time "}<span style={{ border: "1px solid white" }}>{totalTimeFormatted()}</span></IonLabel>
+                <IonLabel>{"Total time "}<span style={{ border: "1px solid white", borderRadius: "0.5rem", padding: "0.2rem" }}>{totalTimeFormatted()}</span></IonLabel>
               </div>
             </IonItem>
           </div>
