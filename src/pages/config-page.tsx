@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { IonContent, IonPage } from "@ionic/react";
+import { useIonViewDidEnter, useIonViewWillLeave } from '@ionic/react';
+import { KeepAwake } from '@capacitor-community/keep-awake';
 import ConfigList from "../components/config-list/component";
 import Countdown from "../components/countdown/component";
 import { CountdownKind } from "../components/countdown/types";
@@ -22,6 +24,15 @@ const ConfigPage: React.FC = () => {
   const [configWaitDuration, setConfigWaitDuration] = useState<number>(
     DEFAULT_WAIT_TIME_VALUE,
   );
+
+  // Keep mobile device screen on while app is running
+  useIonViewDidEnter(() => {
+    KeepAwake.keepAwake();
+  });
+
+  useIonViewWillLeave(() => {
+    KeepAwake.allowSleep();
+  });
 
   // Total round count = 2 * number of rounds
   // // It would be +1 for the starting round, but is also -1. Last round finishes after active part
