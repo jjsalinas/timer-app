@@ -1,4 +1,4 @@
-# Timer App
+# <img src="resources/icon.png" width="32"/> Timer App
 
 Ionic + React application to easily set a looped timer, with active + break independently.
 
