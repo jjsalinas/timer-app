@@ -52,6 +52,14 @@ android/app/build/
 android/.gradle/
 android/captures/
 android/local.properties
+android/gradle.properties
+android/app/*.keystore
+android/app/*.jks
+android/*.keystore
+android/.env
+*.keystore
+*.jks
+
 
 # If you don't want to commit generated native platforms at all,
 # uncomment the following lines
