@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.github.jjsalinas.timer-app',
+  appId: 'io.github.jjsalinas.timerapp',
   appName: 'Timer App',
   webDir: 'dist',
   server: {
