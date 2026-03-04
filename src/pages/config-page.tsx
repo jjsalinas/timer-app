@@ -1,29 +1,24 @@
-import { useEffect, useMemo, useState } from "react";
-import { IonContent, IonPage } from "@ionic/react";
+import { useEffect, useMemo, useState } from 'react';
+import { IonContent, IonPage } from '@ionic/react';
 import { useIonViewDidEnter, useIonViewWillLeave } from '@ionic/react';
 import { KeepAwake } from '@capacitor-community/keep-awake';
-import ConfigList from "../components/config-list/component";
-import Countdown from "../components/countdown/component";
-import { CountdownKind } from "../components/countdown/types";
-import { preloadAllAudio, stopAllAudio } from "../utils/audio-utils";
+import ConfigList from '../components/config-list/component';
+import Countdown from '../components/countdown/component';
+import { CountdownKind } from '../components/countdown/types';
+import { preloadAllAudio, stopAllAudio } from '../utils/audio-utils';
 import {
   DEFAULT_ROUNDS_VALUE,
   DEFAULT_ACTIVE_TIME_VALUE,
   DEFAULT_WAIT_TIME_VALUE,
   STARTING_ROUND_DURATION,
-} from "../constants";
+} from '../constants';
 
 const ConfigPage: React.FC = () => {
   const [showCountdown, setShowCountdown] = useState<boolean>(false);
   const [currentRound, setCurrentRound] = useState<number>(1);
-  const [configRounds, setConfigRounds] =
-    useState<number>(DEFAULT_ROUNDS_VALUE);
-  const [configActiveDuration, setConfigActiveDuration] = useState<number>(
-    DEFAULT_ACTIVE_TIME_VALUE,
-  );
-  const [configWaitDuration, setConfigWaitDuration] = useState<number>(
-    DEFAULT_WAIT_TIME_VALUE,
-  );
+  const [configRounds, setConfigRounds] = useState<number>(DEFAULT_ROUNDS_VALUE);
+  const [configActiveDuration, setConfigActiveDuration] = useState<number>(DEFAULT_ACTIVE_TIME_VALUE);
+  const [configWaitDuration, setConfigWaitDuration] = useState<number>(DEFAULT_WAIT_TIME_VALUE);
 
   // Keep mobile device screen on while app is running
   useIonViewDidEnter(() => {
@@ -39,17 +34,8 @@ const ConfigPage: React.FC = () => {
   const totalRounds = () => configRounds * 2;
   const totalRoundsValue = useMemo(() => totalRounds(), [configRounds]);
 
-  const startCountdown = (
-    rounds: number,
-    activeDuration: number,
-    waitDuration: number,
-  ) => {
-    if (
-      currentRound === 1 &&
-      rounds > 0 &&
-      activeDuration > 0 &&
-      waitDuration > 0
-    ) {
+  const startCountdown = (rounds: number, activeDuration: number, waitDuration: number) => {
+    if (currentRound === 1 && rounds > 0 && activeDuration > 0 && waitDuration > 0) {
       setConfigRounds(rounds);
       setConfigActiveDuration(activeDuration);
       setConfigWaitDuration(waitDuration);
@@ -98,6 +84,26 @@ const ConfigPage: React.FC = () => {
     return configWaitDuration;
   };
 
+  const getTimeLeftInSeconds = () => {
+    let totalLeft = 0;
+    for (let i = currentRound; i <= totalRounds(); i++) {
+      if (i === 1) {
+        totalLeft += STARTING_ROUND_DURATION;
+        continue;
+      }
+      if (i % 2 == 0) {
+        totalLeft += configActiveDuration;
+      } else {
+        totalLeft += configWaitDuration;
+      }
+    }
+    return totalLeft;
+  };
+
+  const timeLeft = useMemo(() => {
+    return getTimeLeftInSeconds();
+  }, [currentRound]);
+
   const getCountdown = (roundValue: number) => {
     if (!showCountdown) {
       return <></>;
@@ -105,7 +111,6 @@ const ConfigPage: React.FC = () => {
 
     const newType = getRoundType(roundValue);
     const newSeconds = getRoundSeconds(roundValue);
-
     return (
       <Countdown
         type={newType}
@@ -114,6 +119,7 @@ const ConfigPage: React.FC = () => {
         totalRounds={totalRoundsValue}
         updateCurrentRound={updateRound}
         cancelAction={cancelCountdown}
+        timeLeftInSeconds={timeLeft}
       />
     );
   };

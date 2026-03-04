@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { CountdownProps } from "./props";
-import { IonButton, IonFooter, IonIcon, IonText } from "@ionic/react";
+import { useEffect, useRef, useState } from 'react';
+import { CountdownProps } from './props';
+import { IonButton, IonFooter, IonIcon, IonText } from '@ionic/react';
 import {
   playSkipForwardOutline,
   playSkipBackOutline,
   pauseCircleOutline,
   playCircleOutline,
   stopCircleOutline,
-} from "ionicons/icons";
-import "./styles.css";
-import { CountdownKind } from "./types";
-import { audioIds, playAudio, stopAllAudio } from "../../utils/audio-utils";
+} from 'ionicons/icons';
+import './styles.css';
+import { CountdownKind } from './types';
+import { audioIds, playAudio, stopAllAudio } from '../../utils/audio-utils';
 
 const Countdown: React.FC<CountdownProps> = ({
   type,
@@ -19,9 +19,11 @@ const Countdown: React.FC<CountdownProps> = ({
   totalRounds,
   updateCurrentRound,
   cancelAction,
+  timeLeftInSeconds,
 }: CountdownProps) => {
   const [tickingSecond, setTickingSecond] = useState<number>(seconds);
   const [timeouts, setTimeouts] = useState<NodeJS.Timeout[]>([]);
+  const [timeLeftCurrent, setTimeLeftCurrent] = useState<number>(timeLeftInSeconds);
   const styleClassName = `countdown-${type}`;
 
   const clearTimeouts = () => {
@@ -35,6 +37,7 @@ const Countdown: React.FC<CountdownProps> = ({
     if (tickingSecond !== seconds) {
       clearTimeouts();
       setTickingSecond(seconds);
+      setTimeLeftCurrent(timeLeftInSeconds);
     }
     if (paramItem?.stopSounds === true) {
       await stopAllAudio();
@@ -57,6 +60,7 @@ const Countdown: React.FC<CountdownProps> = ({
   const tickOneSecond = () => {
     const id = setTimeout(() => setTickingSecond(tickingSecond - 1), 1000);
     setTimeouts([...timeouts, id]);
+    setTimeLeftCurrent(timeLeftCurrent - 1);
   };
 
   const pauseCount = async () => {
@@ -65,6 +69,13 @@ const Countdown: React.FC<CountdownProps> = ({
     } else {
       tickOneSecond();
     }
+  };
+
+  const getTimeLeftLabel = () => {
+    if (timeLeftCurrent >= 60 * 60) {
+      return new Date(timeLeftCurrent * 1000).toISOString().slice(11, 19);
+    }
+    return new Date(timeLeftCurrent * 1000).toISOString().slice(14, 19);
   };
 
   useEffect(() => {
@@ -108,6 +119,7 @@ const Countdown: React.FC<CountdownProps> = ({
         <div className="timecount-footer">
           <IonButton
             shape="round"
+            size="large"
             onClick={async () => await resetCount({ stopSounds: true })}
             onDoubleClick={async () => backOneRound()}
           >
@@ -117,13 +129,14 @@ const Countdown: React.FC<CountdownProps> = ({
             <h3>
               {currentRound} / {totalRounds}
             </h3>
+            <h4>{getTimeLeftLabel()}</h4>
           </IonText>
-          <IonButton shape="round" onClick={async () => await finishCount()}>
+          <IonButton shape="round" size="large" onClick={async () => await finishCount()}>
             <IonIcon slot="icon-only" icon={playSkipForwardOutline}></IonIcon>
           </IonButton>
         </div>
         <div className="timecount-footer-actions">
-          <IonButton onClick={pauseCount} style={{ width: "10rem" }}>
+          <IonButton onClick={pauseCount} style={{ width: '10rem' }}>
             {timeouts.length > 0 && (
               <>
                 <IonText>Pause</IonText>
@@ -137,7 +150,7 @@ const Countdown: React.FC<CountdownProps> = ({
               </>
             )}
           </IonButton>
-          <IonButton onClick={cancelAction} style={{ width: "10rem" }}>
+          <IonButton onClick={cancelAction} style={{ width: '10rem' }}>
             Stop
             <IonIcon slot="end" icon={stopCircleOutline}></IonIcon>
           </IonButton>

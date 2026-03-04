@@ -1,75 +1,75 @@
 .countdown-wrapper {
-    height: 85%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+  height: 85%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .countdown-starting {
-    background-color: #2a63f5;
+  background-color: #2a63f5;
 }
 
 .countdown-countdown {
-    background-color: #25be5b;
+  background-color: #25be5b;
 }
 
 .countdown-intermission {
-    background-color: #be253a;
+  background-color: #be253a;
 }
 
 .timecount-text {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    @media (max-width: 1250px) {
-        width: 90%;
-    }
-    @media (min-width: 1250px) {
-        width: 100%;
-    }
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  @media (max-width: 1250px) {
+    width: 90%;
+  }
+  @media (min-width: 1250px) {
+    width: 100%;
+  }
 }
 
 .timecount-text > h1 {
-    @media (max-width: 1000px) {
-        font-size: 15rem;
-    }
-    @media (min-width: 1001px) and (max-width: 1249px) {
-        font-size: 17rem;
-    }
-    @media (min-width: 1250px) {
-        font-size: 25rem;
-    }
+  @media (max-width: 1000px) {
+    font-size: 15rem;
+  }
+  @media (min-width: 1001px) and (max-width: 1249px) {
+    font-size: 17rem;
+  }
+  @media (min-width: 1250px) {
+    font-size: 25rem;
+  }
 }
 
 .timecount-footer-controls {
-    height: 15%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+  height: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .timecount-footer {
-    @media (max-width: 1250px) {
-        width: 90%;
-    }
-    @media (min-width: 1250px) {
-        width: 30%;
-    }
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  @media (max-width: 1250px) {
+    width: 90%;
+  }
+  @media (min-width: 1250px) {
+    width: 30%;
+  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .timecount-footer-actions {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
