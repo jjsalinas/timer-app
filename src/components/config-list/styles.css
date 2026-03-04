@@ -1,7 +1,7 @@
 .content-wrapper-center {
   @media (max-width: 900px) {
     max-width: 100%;
-    height: 100%;
+    height: 97%;
   }
   @media (min-width: 901px) {
     max-width: 66%;
