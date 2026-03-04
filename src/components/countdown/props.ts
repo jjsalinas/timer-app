@@ -1,4 +1,4 @@
-import { CountdownKind } from "./types";
+import { CountdownKind } from './types';
 
 export interface CountdownProps {
   type: CountdownKind;
@@ -7,4 +7,5 @@ export interface CountdownProps {
   totalRounds: number;
   updateCurrentRound: (backwards?: boolean) => void;
   cancelAction: () => void;
+  timeLeftInSeconds: number;
 }

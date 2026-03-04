@@ -1,17 +1,17 @@
 // const AUDIO_IDS = ["tic-tac", "bell", "end"];
 
-import { NativeAudio } from "@capgo/native-audio";
+import { NativeAudio } from '@capgo/native-audio';
 
 export enum audioIds {
-  ticTac = "tic-tac",
-  bell = "bell",
-  end = "end",
+  ticTac = 'tic-tac',
+  bell = 'bell',
+  end = 'end',
 }
 
 enum audioFiles {
-  ticTac = "assets/tic-tac.mp3",
-  bell = "assets/winner-bell-game-show.mp3",
-  end = "assets/goodresult.mp3",
+  ticTac = 'assets/tic-tac.mp3',
+  bell = 'assets/winner-bell-game-show.mp3',
+  end = 'assets/goodresult.mp3',
 }
 
 export const preloadAllAudio = async () => {
